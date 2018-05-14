@@ -19,7 +19,6 @@ namespace MedicTalk
 		public string _minute;
 		public string _time;
 		public string _type;
-		List<string> ParameterValues;
 		public Request_Emergency _emergencyRequest;
 
 		public Shower(HomePage _homePage, Mysql_Connect _connect, Form1 _form1)

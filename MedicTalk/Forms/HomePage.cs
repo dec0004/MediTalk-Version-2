@@ -53,7 +53,7 @@ namespace MedicTalk
 				form1.Logout();
 				form1.UserNameProperty = "";
 				form1.PasswordProperty = "";
-				form1.UserIDProperty = "0";
+				//form1.UserIDProperty = "0";
 			}
 			
 		}
