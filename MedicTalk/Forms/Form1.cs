@@ -105,17 +105,7 @@ namespace MedicTalk
 
 
 
-		public string UserIDProperty
-		{
-			get
-			{
-				return User_Id;
-			}
-			set
-			{
-				User_Id = value;
-			}
-		}
+
 
 		public string PasswordProperty
 		{
