@@ -29,7 +29,7 @@ namespace MedicTalk
 			Parameters.Add("Section");
 			Parameters.Add("Room");
 			ParameterValues = new List<string>();
-			ParameterValues.Add(form1.UserIDProperty);
+			//ParameterValues.Add(form1.UserIDProperty);
 			ParameterValues.Add("Emergency Request");
 			ParameterValues.Add("Emergency");
 			ParameterValues.Add(form1.FirstNameProperty);
