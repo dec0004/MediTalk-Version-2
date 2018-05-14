@@ -1,0 +1,132 @@
+DROP TABLE NewTimedRequests;
+DROP TABLE NEWFoodRequests;
+DROP TABLE NEWOtherRequests;
+DROP TABLE NEWStaff;
+DROP TABLE NEWResidents;
+DROP TABLE NEWUsers;
+DROP TABLE NEWFood;
+
+
+CREATE TABLE NEWUsers (
+	UID int(10) AUTO_INCREMENT NOT NULL,
+	UserName VARCHAR(100) NOT NULL,
+	FirstName VARCHAR(100) NOT NULL,
+	LastName VARCHAR(100) NOT NULL,
+	Password VARCHAR(255) NOT NULL,
+	PRIMARY KEY (UID)
+) ENGINE=InnoDB;
+
+CREATE TABLE NEWStaff (
+	UID int(10) NOT NULL,
+	Role VARCHAR(100) NOT NULL,
+	PrivilegeLevel INT(1) NOT NULL,
+	PRIMARY KEY (UID),
+	FOREIGN KEY (UID) References NEWUsers(UID)
+) ENGINE=InnoDB;
+
+CREATE TABLE NEWResidents (
+	UID int(10) NOT NULL,
+	Room VARCHAR(10),
+	Section VARCHAR(10),
+	PRIMARY KEY (UID),
+	FOREIGN KEY (UID) References NEWUsers(UID)
+) ENGINE=InnoDB;
+
+CREATE TABLE NEWOtherRequests (
+	UID int(10) NOT NULL,
+	TypeOfRequest VARCHAR(100),
+	Options VARCHAR(100),
+	DateOfRequest DATE,
+	TimeOfRequest TIME,
+	Completed VARCHAR(1),
+	PRIMARY KEY (UID, DateOfRequest, TimeOfRequest),
+	FOREIGN KEY (UID) References NEWUsers(UID)
+) ENGINE=InnoDB;
+
+CREATE TABLE NEWFoodRequests (
+	UID int(10) NOT NULL,
+	DateOfRequest DATE,
+	TimeOfRequest TIME,
+	MealType VARCHAR(100),
+	HotOrCold VARCHAR(10),
+	MealName VARCHAR(100),
+	Completed VARCHAR(1),
+	PRIMARY KEY (UID, DateOfRequest, TimeOfRequest),
+	FOREIGN KEY (UID) References NEWUsers(UID)
+) ENGINE=InnoDB;
+
+CREATE TABLE NEWTimedRequests (
+	UID int(10) NOT NULL,
+	TypeOfRequest VARCHAR(100),
+	DateToComplete DATE,
+	TimeToComplete TIME NOT NULL,
+	PRIMARY KEY (UID, TimeToComplete),
+	FOREIGN KEY (UID) References NEWUsers(UID)
+) ENGINE=InnoDB;
+
+CREATE TABLE NEWFood (
+	FoodID int(10) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	FoodName VARCHAR(100) NOT NULL,
+	HotOrCold VARCHAR(10) NOT NULL,
+	MealType VARCHAR(20) NOT NULL
+) ENGINE=InnoDB;
+
+INSERT INTO NEWFood (FoodName, HotOrCold, MealType) VALUES ("Bacon and egg toast", "hot", "breakfast");
+INSERT INTO NEWFood (FoodName, HotOrCold, MealType) VALUES ("English breakfast", "hot", "breakfast");
+INSERT INTO NEWFood (FoodName, HotOrCold, MealType) VALUES ("Cereal", "cold", "breakfast");
+INSERT INTO NEWFood (FoodName, HotOrCold, MealType) VALUES ("Oatmeal", "cold", "breakfast");
+INSERT INTO NEWFood (FoodName, HotOrCold, MealType) VALUES ("Oatmeal and milk", "warm", "breakfast");
+
+INSERT INTO NEWFood (FoodName, HotOrCold, MealType) VALUES ("Lasagna", "hot", "lunch");
+INSERT INTO NEWFood (FoodName, HotOrCold, MealType) VALUES ("Tuna sandwich", "hot", "lunch");
+INSERT INTO NEWFood (FoodName, HotOrCold, MealType) VALUES ("Egg salad sandwich", "cold", "lunch");
+INSERT INTO NEWFood (FoodName, HotOrCold, MealType) VALUES ("Chinse food", "warm", "lunch");
+
+INSERT INTO NEWFood (FoodName, HotOrCold, MealType) VALUES ("Pizza", "hot", "dinner");
+INSERT INTO NEWFood (FoodName, HotOrCold, MealType) VALUES ("Spaghetti", "hot", "dinner");
+
+INSERT INTO NEWFood (FoodName, HotOrCold, MealType) VALUES ("Coffee", "hot", "drink");
+INSERT INTO NEWFood (FoodName, HotOrCold, MealType) VALUES ("Tea", "hot", "drink");
+INSERT INTO NEWFood (FoodName, HotOrCold, MealType) VALUES ("Milk", "cold", "drink");
+INSERT INTO NEWFood (FoodName, HotOrCold, MealType) VALUES ("Iced tea", "cold", "drink");
+
+
+INSERT INTO NEWUsers (UserName, FirstName, LastName, Password) VALUES ("admin", "Burak", "Erozkan", "admin");
+INSERT INTO NEWUsers (UserName, FirstName, LastName, Password) VALUES ("Jen1", "Jennifer", "Aniston", "admin");
+INSERT INTO NEWUsers (UserName, FirstName, LastName, Password) VALUES ("Sansa", "Sansa", "Stark", "admin");
+INSERT INTO NEWUsers (UserName, FirstName, LastName, Password) VALUES ("Arya", "Arya", "Stark", "admin");
+
+INSERT INTO NEWUsers (UserName, FirstName, LastName, Password) VALUES ("resident", "Burii", "Ero", "resident");
+INSERT INTO NEWUsers (UserName, FirstName, LastName, Password) VALUES ("Catelyn", "Catelyn", "Stark", "resident");
+INSERT INTO NEWUsers (UserName, FirstName, LastName, Password) VALUES ("Johnno", "John", "Howard", "resident");
+
+
+INSERT INTO NEWStaff VALUES ((SELECT UID FROM NEWUsers WHERE UserName = 'admin'), "Staff", 5);
+INSERT INTO NEWStaff VALUES ((SELECT UID FROM NEWUsers WHERE UserName = 'Jen1'), "Staff", 5);
+INSERT INTO NEWStaff VALUES ((SELECT UID FROM NEWUsers WHERE UserName = 'Sansa'), "Staff", 5);
+
+INSERT INTO NEWResidents VALUE ((SELECT UID FROM NEWUsers WHERE UserName = 'resident'), 4, "A1");
+INSERT INTO NEWResidents VALUE ((SELECT UID FROM NEWUsers WHERE UserName = 'Catelyn'), 3, "A1");
+INSERT INTO NEWResidents VALUE ((SELECT UID FROM NEWUsers WHERE UserName = 'Johnno'), 1, "A1");
+
+INSERT INTO NEWOtherRequests (UID, TypeOfRequest, TimeOfRequest, DateOfRequest) VALUES ("5", "Shower", NOW(), CURDATE());
+INSERT INTO NEWOtherRequests (UID, TypeOfRequest, TimeOfRequest, DateOfRequest) VALUES ("7", "Shower", NOW(), CURDATE());
+
+
+SELECT U.UID, U.FirstName, U.LastName, Res.Room, Res.Section, Req.TypeOfRequest, Req.Options, Req.DateOfRequest, Req.TimeOfRequest, Req.Completed 
+FROM NEWUsers U
+INNER JOIN NEWResidents Res ON U.UID = Res.UID
+INNER JOIN NEWOtherRequests Req ON Res.UID = Req.UID;
+
+
+SELECT U.UID, U.FirstName, U.LastName, Res.Room, Res.Section, Req.MealType, Req.HotOrCold, Req.MealName, Req.DateOfRequest, Req.TimeOfRequest, Req.Completed 
+FROM NEWUsers U
+INNER JOIN NEWResidents Res ON U.UID = Res.UID
+INNER JOIN NEWFoodRequests Req ON Res.UID = Req.UID;
+
+
+SELECT U.UID, U.FirstName, U.LastName, Res.Room, Res.Section, Req.TypeOfRequest, Req.Options, Req.DateOfRequest, Req.TimeOfRequest, Req.Completed 
+FROM NEWUsers U
+INNER JOIN NEWResidents Res ON U.UID = Res.UID
+INNER JOIN NEWOtherRequests Req ON Res.UID = Req.UID;
+
