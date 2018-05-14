@@ -146,9 +146,6 @@
 
 		#endregion
 
-		private System.Windows.Forms.Button Forgot_Password;
-		private System.Windows.Forms.Button Forgot_UserName;
-		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.TextBox Username_Textbox;
 		private System.Windows.Forms.TextBox Password_Textbox;
 		private System.Windows.Forms.Label label4;

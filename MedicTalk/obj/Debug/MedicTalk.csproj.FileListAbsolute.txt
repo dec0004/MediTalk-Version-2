@@ -148,3 +148,6 @@ C:\Users\Jordan\Documents\Swinburne\DTAP\MediTalk\MedicTalk\obj\Debug\MedicTalk.
 C:\Users\Jordan\Documents\Swinburne\DTAP\MediTalkv2\MediTalk-V2\MedicTalk\bin\Debug\MedicTalk.exe.config
 C:\Users\Jordan\Documents\Swinburne\DTAP\MediTalkv2\MediTalk-V2\MedicTalk\obj\Debug\MedicTalk.exe
 C:\Users\Jordan\Documents\Swinburne\DTAP\MediTalkv2\MediTalk-V2\MedicTalk\obj\Debug\MedicTalk.pdb
+C:\Users\Jordan\Documents\Swinburne\DTAP\MediTalk2\MediTalk-Version-2\MedicTalk\bin\Debug\MedicTalk.exe.config
+C:\Users\Jordan\Documents\Swinburne\DTAP\MediTalk2\MediTalk-Version-2\MedicTalk\obj\Debug\MedicTalk.exe
+C:\Users\Jordan\Documents\Swinburne\DTAP\MediTalk2\MediTalk-Version-2\MedicTalk\obj\Debug\MedicTalk.pdb

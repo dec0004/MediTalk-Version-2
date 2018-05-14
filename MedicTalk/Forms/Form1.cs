@@ -25,16 +25,11 @@ namespace MedicTalk
 		public string _room;
 		public string _section;
 		public Mysql_Connect _connect;
-		private string User_Id;List<string> Keywords;
-		List<string> Parameters;
-		
-		private string[] Query_Results;
 
 		public Form1()
 		{
 			InitializeComponent();
 			_connect = new Mysql_Connect();
-			User_Id = "0";
 			_firstName = "";
 			_lastName = "";
 			_room = "";
