@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
+
 
 namespace MedicTalk
 {
@@ -14,13 +16,24 @@ namespace MedicTalk
     {
         private Form1 form1;
         public Mysql_Connect _connect;
-
-        public List_Of_Requests(Form1 form1, Mysql_Connect connect)
+		private int food_request_number;
+		private int shower_request_number;
+		private System.Media.SoundPlayer player;
+		private int food_request_count;
+		private int shower_request_count;
+		public List_Of_Requests(Form1 form1, Mysql_Connect connect)
         {
             this.form1 = form1;
             InitializeComponent();
             _connect = connect;
-        }
+			food_request_number = 0;
+			shower_request_number = 0;
+
+			player = new System.Media.SoundPlayer();
+			player.SoundLocation = @"C:\Users\Jordan\Documents\Swinburne\DTAP\MediTalk2\MediTalk-Version-2\MedicTalk\Resources/ding-sound-effect_2.wav";
+			player.Load();
+
+		}
 
         // Load the list of requests on button click
         private void List_Of_Requests_Load(object sender, EventArgs e)
@@ -78,5 +91,27 @@ namespace MedicTalk
             }
         }
 
-    }
+		private void timer1_Tick(object sender, EventArgs e)
+		{
+			food_request_count = int.Parse(_connect.Count("SELECT COUNT(*) FROM NEWFoodRequests"));
+			shower_request_count = int.Parse(_connect.Count("SELECT COUNT(*) FROM NEWTimedRequests"));
+
+
+			if (food_request_number < food_request_count)
+			{
+
+				player.Play();
+				food_request_number = food_request_count;
+			}
+			
+			if (shower_request_number < shower_request_count)
+			{
+				player.Play();
+				shower_request_number = shower_request_count;
+			}
+			
+			
+			
+		}
+	}
 }
