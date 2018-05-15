@@ -49,7 +49,7 @@ namespace MediTalk
 
 
 		}
-		/*
+		
 		[Test]
 		public void Nofication_for_new_timed_request()
 		{
@@ -66,8 +66,8 @@ namespace MediTalk
 				player.Play();
 				shower_request_number = shower_request_count;
 			}
-
-		}*/
+			Assert.AreEqual(9, shower_request_number);
+		}
 
 	}
 }
