@@ -34,7 +34,7 @@ namespace MediTalk
 			food_request_number = 0;
 			_MySQL = new Mysql_Connect();
 			player = new System.Media.SoundPlayer();
-			player.SoundLocation = @"C:\Users\Jordan\Documents\Swinburne\DTAP\MediTalk2\MediTalk-Version-2\MedicTalk\Resources/ding-sound-effect_2.wav";
+			player.SoundLocation = @"Resources/ding-sound-effect_2.wav";
 			player.Load();
 			food_request_count = int.Parse(_MySQL.Count("SELECT COUNT(*) FROM NEWFoodRequests"));
 
