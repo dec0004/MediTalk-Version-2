@@ -85,6 +85,7 @@
     <Compile Include="Forms\List_Of_Requests.Designer.cs">
       <DependentUpon>List_Of_Requests.cs</DependentUpon>
     </Compile>
+    <Compile Include="List_of_requests_test.cs" />
     <Compile Include="Mysql_Connect.cs" />
     <Compile Include="Mysql_User_Handler.cs" />
     <Compile Include="Mysql_User_Handler_Unittest.cs" />

@@ -21,6 +21,7 @@ namespace MedicTalk
 		private System.Media.SoundPlayer player;
 		private int food_request_count;
 		private int shower_request_count;
+
 		public List_Of_Requests(Form1 form1, Mysql_Connect connect)
         {
             this.form1 = form1;
@@ -91,7 +92,7 @@ namespace MedicTalk
             }
         }
 
-		private void timer1_Tick(object sender, EventArgs e)
+		public void timer1_Tick(object sender, EventArgs e)
 		{
 			food_request_count = int.Parse(_connect.Count("SELECT COUNT(*) FROM NEWFoodRequests"));
 			shower_request_count = int.Parse(_connect.Count("SELECT COUNT(*) FROM NEWTimedRequests"));
@@ -109,9 +110,6 @@ namespace MedicTalk
 				player.Play();
 				shower_request_number = shower_request_count;
 			}
-			
-			
-			
 		}
 	}
 }
