@@ -16,6 +16,8 @@ namespace MedicTalk
 
 	public partial class Form1 : Form
 	{
+		private bool loggedIn;
+
 		HomePage _HomePage;
         List_Of_Requests _requestsList;
 		private string User_Name;
@@ -25,11 +27,20 @@ namespace MedicTalk
 		public string _room;
 		public string _section;
 		public Mysql_Connect _connect;
+		private bool _commandResult;
+		private string User_Id;List<string> Keywords;
+		List<string> Parameters;
+		List<string> ParameterValues;
+		
+		private string[] Query_Results;
 
 		public Form1()
 		{
 			InitializeComponent();
+			loggedIn = false;
+			_commandResult = false;
 			_connect = new Mysql_Connect();
+			User_Id = "0";
 			_firstName = "";
 			_lastName = "";
 			_room = "";
@@ -73,6 +84,7 @@ namespace MedicTalk
                 }
                 else
                 {
+                    loggedIn = true;
 
                     if (Mysql_User_Handler.UserType == "staff")
                     {
@@ -87,7 +99,46 @@ namespace MedicTalk
                         _HomePage.Show();
                     }
                 }
-		
+
+                /*
+				_commandResult = _connect.Login("SELECT * FROM Accounts WHERE User_Name = @user and Password=@Password", User_Name, Password);
+
+				//Creates list of keywords to pass to select statement. This tells he select
+				//function to return the values from those keywords.
+				Keywords = new List<string>();
+				Keywords.Add("User_Id");
+				Keywords.Add("First_Name");
+				Keywords.Add("Last_Name");
+				Keywords.Add("Section");
+				Keywords.Add("Room");
+				Parameters = new List<string>();
+				Parameters.Add("User_Name");
+				Parameters.Add("Password");
+				ParameterValues = new List<string>();
+				ParameterValues.Add(User_Name);
+				ParameterValues.Add(Password);
+				
+				string _returnedQuery = _connect.Select("SELECT User_id, First_Name, Last_Name, Section, Room FROM Accounts WHERE User_Name = @User_Name and Password=@Password", "1", Keywords, Parameters, ParameterValues);
+			
+				Query_Results = _returnedQuery.Split('/');
+				User_Id = Query_Results[0];
+				_firstName = Query_Results[1];
+				_lastName = Query_Results[2];
+				_section = Query_Results[3];
+				_room = Query_Results[4];
+
+				if (_commandResult)
+				{
+					loggedIn = true;
+					_HomePage = new MedicTalk.HomePage(this, _connect);
+					this.Hide();
+					_HomePage.Show();
+				}
+				else
+				{
+					MessageBox.Show("Invalid Credentials");
+				}
+                */
 			}
 		}
 
@@ -105,7 +156,17 @@ namespace MedicTalk
 
 
 
-
+		public string UserIDProperty
+		{
+			get
+			{
+				return User_Id;
+			}
+			set
+			{
+				User_Id = value;
+			}
+		}
 
 		public string PasswordProperty
 		{

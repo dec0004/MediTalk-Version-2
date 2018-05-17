@@ -216,7 +216,6 @@
 			this.button10.Size = new System.Drawing.Size(81, 81);
 			this.button10.TabIndex = 18;
 			this.button10.UseVisualStyleBackColor = true;
-			this.button10.Click += new System.EventHandler(this.button10_Click);
 			// 
 			// label8
 			// 
@@ -305,7 +304,7 @@
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Button button9;
 		private System.Windows.Forms.Label label7;
-		public System.Windows.Forms.Button button10;
+		private System.Windows.Forms.Button button10;
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.Button button3;

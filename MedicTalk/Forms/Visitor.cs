@@ -87,7 +87,7 @@ namespace MedicTalk
 			Parameters.Add("Visitor_d");
 			Parameters.Add("Visit_t");
 			ParameterValues = new List<string>();
-			//ParameterValues.Add(form1.UserIDProperty.ToString());
+			ParameterValues.Add(form1.UserIDProperty.ToString());
 			ParameterValues.Add(_firstName);
 			ParameterValues.Add(_lastName);
 			ParameterValues.Add(_date);

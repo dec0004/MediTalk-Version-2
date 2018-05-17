@@ -124,16 +124,8 @@ namespace MedicTalk
         // Once a user has submitted their request for food
         private void Submit_Clicked(object sender, EventArgs e)
         {
-
-			if (MealSelection.Text == "Make your choice")
-			{
-				MessageBox.Show("You have not made a choice");
-			}
-			else
-			{
-				Requests_Handler.Add_Food(_chosenMealName, _HotOrCold, _mealType);
-				MessageBox.Show("Your request has been recorded");
-			}
+            Requests_Handler.Add_Food(_chosenMealName, _HotOrCold, _mealType);
+            MessageBox.Show("Your request has been recorded");
         }
 
         // Once a user has entered extra information regarding their request
@@ -153,11 +145,6 @@ namespace MedicTalk
 		{
 			MessageBox.Show("A nurse will be with you as soon as possible");
 			_request_emerg.CallRequest();
-		}
-
-		private void pictureBox2_Click(object sender, EventArgs e)
-		{
-
 		}
 	}
 }

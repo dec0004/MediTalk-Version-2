@@ -21,7 +21,7 @@ namespace MedicTalk
 		public void CallRequest()
 		{
 			Parameters = new List<string>();
-			//Parameters.Add("User_id");
+			Parameters.Add("User_id");
 			Parameters.Add("Type_of");
 			Parameters.Add("Choice");
 			Parameters.Add("First_Name");
@@ -29,7 +29,7 @@ namespace MedicTalk
 			Parameters.Add("Section");
 			Parameters.Add("Room");
 			ParameterValues = new List<string>();
-			//ParameterValues.Add(form1.UserIDProperty);
+			ParameterValues.Add(form1.UserIDProperty);
 			ParameterValues.Add("Emergency Request");
 			ParameterValues.Add("Emergency");
 			ParameterValues.Add(form1.FirstNameProperty);
