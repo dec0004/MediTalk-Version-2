@@ -115,11 +115,31 @@ namespace MedicTalk
             }
         }
 
+		public static void Show_Resident(string text)
+		{
+			if (_MySQL.OpenConnection())
+			{
+				MySqlDataAdapter mySqlDataAdapter_Resident = new MySqlDataAdapter(
+					// "SELECT U.UID, U.FirstName, U.LastName, Res.Room, Res.Section, Req.MealType, Req.HotOrCold, Req.MealName, Req.DateOfRequest, Req.TimeOfRequest, Req.Completed FROM NEWUsers U " +
 
-        /// <summary>
-        /// Show requests that must be done at a specific time
-        /// </summary>
-        public static void Show_Timed_Requests()
+					"SELECT UID, Room, Section, Age, Description, EmergencyContactNumber, MedicalConsiderations FROM NEWResidents WHERE FirstName = @text;"
+					, _MySQL.connection);
+				DataTable = new DataTable();
+				mySqlDataAdapter_Resident.Fill(DataTable);
+
+				_MySQL.CloseConnection();
+			}
+			else
+			{
+				Console.WriteLine("Could not open connection");
+			}
+		}
+
+
+		/// <summary>
+		/// Show requests that must be done at a specific time
+		/// </summary>
+		public static void Show_Timed_Requests()
         {            
             if (_MySQL.OpenConnection())
             {

@@ -19,6 +19,9 @@ namespace MedicTalk
 		public Mysql_Connect _connect;
 		public Request_Emergency _emergencyRequest;
 		public Visitor _visitor;
+		List<string> Parameters;
+		List<string> ParameterValues;
+		public bool result;
 
 		public HomePage(Form1 form1, Mysql_Connect connect)
 		{
@@ -26,7 +29,7 @@ namespace MedicTalk
 			InitializeComponent();
 			_connect = connect;
 			_emergencyRequest = new Request_Emergency(_connect, form1);
-
+		
 			////Initialize button icons to fit button size
 			BreakFast_Button.BackgroundImageLayout = ImageLayout.Stretch;
 			LunchButton.BackgroundImageLayout = ImageLayout.Stretch;
@@ -120,6 +123,29 @@ namespace MedicTalk
 		{
 			MessageBox.Show("A nurse will be with you as soon as possible");
 			_emergencyRequest.CallRequest();
+		}
+
+		public void button10_Click(object sender, EventArgs e)
+		{
+			MessageBox.Show("A nurse will be with you as soon as possible");
+			Parameters = new List<string>();
+			Parameters.Add("User_id");
+			Parameters.Add("Type_of_request");
+			Parameters.Add("Date_to_complete");
+			Parameters.Add("Time_to_complete");
+			ParameterValues = new List<string>();
+			ParameterValues.Add("6");
+			ParameterValues.Add("General Assistance");
+			ParameterValues.Add(DateTime.Now.ToString("HH:mm:ss tt"));
+			ParameterValues.Add(DateTime.Now.Date.ToString());
+
+			if (_connect.Insert("INSERT INTO NEWTimedRequests (UID, TypeOfRequest, DateToComplete, TimeToComplete) VALUES (@User_id, @Type_of_request, @Date_to_complete, @Time_to_complete);", Parameters, ParameterValues))
+			{
+				result = true;
+			}
+
+			result =  false;
+			
 		}
 	}
 }

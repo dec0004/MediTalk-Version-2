@@ -21,7 +21,7 @@ namespace MedicTalk
 		private System.Media.SoundPlayer player;
 		private int food_request_count;
 		private int shower_request_count;
-
+		public AdminCPanel adminCPanel;
 		public List_Of_Requests(Form1 form1, Mysql_Connect connect)
         {
             this.form1 = form1;
@@ -110,6 +110,23 @@ namespace MedicTalk
 				player.Play();
 				shower_request_number = shower_request_count;
 			}
+		}
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			adminCPanel = new AdminCPanel(form1, _connect);
+			this.Hide();
+			adminCPanel.Show();
+		}
+
+		private void label1_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void textBox2_TextChanged(object sender, EventArgs e)
+		{
+
 		}
 	}
 }

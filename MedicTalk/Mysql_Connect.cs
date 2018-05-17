@@ -120,7 +120,7 @@ namespace MedicTalk
         // <summary>
         // Used to insert an entry into the database
         // </summary>
-        public void Insert(string _inputCommand, List<string> parameterKey, List<string> parameterValues)
+        public bool Insert(string _inputCommand, List<string> parameterKey, List<string> parameterValues)
 		{
 
 			MySqlCommand _command = new MySqlCommand();
@@ -140,10 +140,19 @@ namespace MedicTalk
 
 				_command.Connection = connection;
 
-				_command.ExecuteNonQuery();
+				//This checks if command worked and returns status for unit tests
+				if (_command.ExecuteNonQuery() > 0)
+				{
+					return true;
+				}
 
 				this.CloseConnection();
+				return false;
+				
+
+			
 			}
+			return false;
 		}
 
 

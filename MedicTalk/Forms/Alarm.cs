@@ -55,9 +55,15 @@ namespace MedicTalk
         // Once user has clicked on submit
         private void Submit_Button_Click(object sender, EventArgs e)
         {
-            Requests_Handler.Add_Timed_Request("alarm", Hour + ":" + Minute + ":00");
-            MessageBox.Show("You have added an alarm");
-
+			if (Hour_Box.Text == "Hour" || Minute_Box.Text == "Minutes")
+			{
+				MessageBox.Show("You must enter all details");
+			}
+			else
+			{
+				Requests_Handler.Add_Timed_Request("alarm", Hour + ":" + Minute + ":00");
+				MessageBox.Show("You have added an alarm");
+			}
             // Reload the alarms so the datagridview is updated
             Display_Alarms();
         }

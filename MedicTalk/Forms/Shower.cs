@@ -77,32 +77,16 @@ namespace MedicTalk
 
         private void Submit_Button_Click(object sender, EventArgs e)
         {
-
-            Requests_Handler.Add_Timed_Request(_type, _hour + ":" + _minute + ":00");
-            MessageBox.Show("Your request has been acknowledged");
-            /*
-            _time = _hour + ":" + _minute;
-            Parameters = new List<string>();
-            Parameters.Add("User_id");
-            Parameters.Add("Type_of");
-            Parameters.Add("Choice");
-            Parameters.Add("First_Name");
-            Parameters.Add("Last_Name");
-            Parameters.Add("Section");
-            Parameters.Add("Room");
-            ParameterValues = new List<string>();
-            ParameterValues.Add(form1.UserIDProperty);
-            ParameterValues.Add("Bathing");
-            ParameterValues.Add(_type);
-            ParameterValues.Add(form1.FirstNameProperty);
-            ParameterValues.Add(form1.LastNameProperty);
-            ParameterValues.Add(form1.SectionProperty);
-            ParameterValues.Add(form1.RoomProperty);
-            _time = _hour + ":" + _minute;
-
-            connect.Insert("INSERT INTO Requests (User_id, Type_of, Choice, First_Name, Last_Name, Section, Room) VALUES (@User_id, @Type_of, @Choice, @First_Name, @Last_Name, @Section, @Room);", Parameters, ParameterValues);
-            MessageBox.Show("Your request has been acknowledged");*/
-        }
+			if (comboBox1.Text == "" || comboBox2.Text == "" || (!Shower_Button.Checked && !Bath_Button.Checked))
+			{
+				MessageBox.Show("You need to fill all details");
+			}
+			else
+			{
+				Requests_Handler.Add_Timed_Request(_type, _hour + ":" + _minute + ":00");
+				MessageBox.Show("Your request has been acknowledged");
+			}
+		}
 
 
 		private void button3_Click_1(object sender, EventArgs e)

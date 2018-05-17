@@ -21,7 +21,7 @@ namespace MedicTalk
 		public void CallRequest()
 		{
 			Parameters = new List<string>();
-			Parameters.Add("User_id");
+			//Parameters.Add("User_id");
 			Parameters.Add("Type_of");
 			Parameters.Add("Choice");
 			Parameters.Add("First_Name");

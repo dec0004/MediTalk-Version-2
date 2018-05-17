@@ -170,3 +170,4 @@ C:\Users\Jordan\Documents\Swinburne\DTAP\MediTalk2\MediTalk-Version-2\MedicTalk\
 C:\Users\Jordan\Documents\Swinburne\DTAP\MediTalk2\MediTalk-Version-2\MedicTalk\obj\Debug\MedicTalk.Shower.resources
 C:\Users\Jordan\Documents\Swinburne\DTAP\MediTalk2\MediTalk-Version-2\MedicTalk\obj\Debug\MedicTalk.Visitor.resources
 C:\Users\Jordan\Documents\Swinburne\DTAP\MediTalk2\MediTalk-Version-2\MedicTalk\obj\Debug\MedicTalk.csproj.GenerateResource.Cache
+C:\Users\Jordan\Documents\Swinburne\DTAP\MediTalk2\MediTalk-Version-2\MedicTalk\obj\Debug\MedicTalk.AdminCPanel.resources
