@@ -106,6 +106,8 @@ namespace MedicTalk
 		private void button1_Click(object sender, EventArgs e)
 		{
 			_newUser = new Add_New_User(this, _connect, form1);
+			this.Hide();
+			_newUser.Show();
 		}
 	}
 }
