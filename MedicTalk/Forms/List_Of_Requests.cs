@@ -17,6 +17,7 @@ namespace MedicTalk
 		public string rowToDel;
 		public string timedRowToDel;
 		public Add_New_User _newUser;
+		public Visitor_Signin _visitor;
         public List_Of_Requests(Form1 form1, Mysql_Connect connect)
         {
             this.form1 = form1;
@@ -108,6 +109,11 @@ namespace MedicTalk
 			_newUser = new Add_New_User(this, _connect, form1);
 			this.Hide();
 			_newUser.Show();
+		}
+
+		private void Visitor_Click(object sender, EventArgs e)
+		{
+			_visitor = new Visitor_Signin( this, _connect, form1);
 		}
 	}
 }
