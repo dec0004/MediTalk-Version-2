@@ -42,7 +42,7 @@ namespace MediTalk
 			Assert.AreEqual(_shower.result, DialogResult.OK);
 
 
-
+			/
 		}
 	}
 }
