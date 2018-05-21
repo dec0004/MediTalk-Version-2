@@ -16,6 +16,7 @@ namespace MedicTalk
         public Mysql_Connect _connect;
 		public string rowToDel;
 		public string timedRowToDel;
+		public Add_New_User _newUser;
         public List_Of_Requests(Form1 form1, Mysql_Connect connect)
         {
             this.form1 = form1;
@@ -38,7 +39,7 @@ namespace MedicTalk
         {
             // Show requests for food
             Requests_Handler.Show_Requests();
-            RequestsList.DataSource = Requests_Handler.DataTable1;
+            Add_New_User_Button.DataSource = Requests_Handler.DataTable1;
 
             // Show requests for wake up calls and showers
             Requests_Handler.Show_Timed_Requests();
@@ -53,7 +54,7 @@ namespace MedicTalk
         public void FoodRequest_Completed(object sender, DataGridViewCellEventArgs e)
         {
 			
-			rowToDel = RequestsList.Rows[e.RowIndex].Cells[10].Value.ToString();
+			rowToDel = Add_New_User_Button.Rows[e.RowIndex].Cells[10].Value.ToString();
 			Debug.WriteLine(rowToDel);
 			
 			Requests_Handler.Complete_Request(rowToDel, "NEWFoodRequest");
@@ -100,6 +101,11 @@ namespace MedicTalk
 
 			Requests_Handler.Complete_Request(timedRowToDel, "NEWTimedRequest");
 			Display_Lists();
+		}
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			_newUser = new Add_New_User(this, _connect, form1);
 		}
 	}
 }
