@@ -112,9 +112,10 @@ namespace MedicTalk
 			_emergencyRequest.CallRequest();
 		}
 
-		private void AlarmsList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+		public void AlarmsList_CellContentClick(object sender, DataGridViewCellEventArgs e)
 		{
-
+			Requests_Handler.Show_Alarms();
+			AlarmsList.DataSource = Requests_Handler.DataTable1;
 		}
 	}
 }

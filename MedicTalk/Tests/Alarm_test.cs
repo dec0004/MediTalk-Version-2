@@ -33,7 +33,9 @@ namespace MediTalk
 			_form1.UserNameProperty = "resident";
 			_form1.PasswordProperty = "resident";
 			_form1.Login_Click(new object(), EventArgs.Empty);
-
+			int numrows = _alarm.AlarmsList.Rows.Count;
+			Console.WriteLine(numrows.ToString());
+			_alarm.AlarmsList_CellContentClick(new object(), new DataGridViewCellEventArgs(1, 1));
 			_alarm.Display_Alarms();
 
 			foreach (DataGridViewRow row in _alarm.AlarmsList.Rows)
@@ -64,22 +66,29 @@ namespace MediTalk
 			_form1.Login_Click(new object(), EventArgs.Empty);
 			//Check cold
 			_alarm.Hour = "5";
-			_alarm.Minute = "32";
-			_alarm.Minute_Box.Text = "32";
+			_alarm.Minute = "35";
+			_alarm.Minute_Box.Text = "35";
 			_alarm.Hour_Box.Text = "5";
-			_alarm.Display_Alarms();
 			
+
+			int numrows = _alarm.AlarmsList.Rows.Count;
+			_alarm.AlarmsList_CellContentClick(new object(), new DataGridViewCellEventArgs(1, 1));
+			_alarm.Display_Alarms();
+			int newNumRows = _alarm.AlarmsList.Rows.Count;
+			_alarm.Submit_Button_Click(new object(), EventArgs.Empty);
+
 			for (int i = 0; i < _alarm.AlarmsList.RowCount; i++)
 			{
-				
-				if (_alarm.AlarmsList.Rows[i].Cells[1].Value.ToString() == "05:32:00")
+				if (_alarm.AlarmsList.Rows[i].Cells[0].Value.ToString() == "05:34:00")
 				{
-					Console.WriteLine(_alarm.AlarmsList.Rows[i].Cells[1].Value.ToString());
+					Console.WriteLine(_alarm.AlarmsList.Rows[i].Cells[0].Value.ToString());
 					isThere = true;
 					Console.WriteLine("csc");
 				}
 			}
-			_alarm.Submit_Button_Click(new object(), EventArgs.Empty);
+
+		
+			
 			Assert.AreEqual(isThere, true);
 
 		}
