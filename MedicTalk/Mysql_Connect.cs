@@ -95,7 +95,8 @@ namespace MedicTalk
         }
 
         // <summary>
-        // Delete a request
+        // Mark a request as complete. Once marked as completed, a request will no longer 
+        // be visible
         // </summary>
         public void Delete_Request(string query, string timeOfRequest)
         {
@@ -327,8 +328,23 @@ namespace MedicTalk
 		}
 
 
-        public void Delete()
-		{
-		}
-	}
+        /// <summary>
+        /// Delete an entry from the database
+        /// </summary>
+        public void Delete(string query)
+        {
+            MySqlCommand _command = new MySqlCommand();
+            if (this.OpenConnection())
+            {
+                _command.CommandText = query;
+                _command.Connection = connection;
+
+                Console.WriteLine(query);
+
+                _command.ExecuteNonQuery(); // Execute the command
+            }
+
+            this.CloseConnection();
+        }
+    }
 }

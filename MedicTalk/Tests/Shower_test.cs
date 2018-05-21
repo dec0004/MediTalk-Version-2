@@ -33,7 +33,8 @@ namespace MediTalk
 			_form1.UserNameProperty = "resident";
 			_form1.PasswordProperty = "resident";
 			_form1.Login_Click(new object(), EventArgs.Empty);
-			//Check cold
+			
+            //Check cold
 			_shower._minute = "32";
 			_shower._hour = "12";
 			_shower.Shower_Button_Changed(new object(), EventArgs.Empty);

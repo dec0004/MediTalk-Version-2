@@ -68,6 +68,10 @@ namespace MedicTalk
         /// </summary>
         public static void Add_Food(string foodName, string HotOrCold, string MealType)
         {
+            Console.WriteLine(
+                "INSERT INTO NEWFoodRequests (UID, MealType, HotOrCold, MealName, TimeOfRequest, DateOfRequest) " +
+                "Values (" + Mysql_User_Handler.User_ID + ", '" + MealType + "', '" + HotOrCold + "', '" + foodName +
+                "', NOW(), CURDATE());");
             // Insert the request into the table
             _MySQL.Insert_Request(
                 "INSERT INTO NEWFoodRequests (UID, MealType, HotOrCold, MealName, TimeOfRequest, DateOfRequest) " +
