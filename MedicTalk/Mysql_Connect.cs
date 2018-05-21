@@ -97,9 +97,13 @@ namespace MedicTalk
         // <summary>
         // Delete a request
         // </summary>
-        public void Delete_Request(string query)
+        public void Delete_Request(string query, string timeOfRequest)
         {
+			this.CloseConnection();
+			string _timeofrequest = timeOfRequest;
             MySqlCommand _command = new MySqlCommand();
+			_command.Parameters.Add(new MySqlParameter("Time", _timeofrequest));
+			//Debug.WriteLine(_timeofrequest);
             if (this.OpenConnection())
             {
                 _command.CommandText = query;
@@ -167,7 +171,6 @@ namespace MedicTalk
 					}
 					
 				}
-
 			}
 			this.CloseConnection();
 			return rows;

@@ -24,6 +24,7 @@ namespace MedicTalk
 		List<string> Parameters;
 		List<string> ParameterValues;
 		public Request_Emergency _emergencyRequest;
+		public System.Windows.Forms.DialogResult _result;
 		public Visitor(HomePage _homePage, Mysql_Connect connect, Form1 _form1)
 		{
 			InitializeComponent();
@@ -77,7 +78,7 @@ namespace MedicTalk
 			_date = dateTimePicker1.Value.ToString();
 		}
 
-		private void button2_Click(object sender, EventArgs e)
+		public void button2_Click(object sender, EventArgs e)
 		{
 		
 			Parameters = new List<string>();
@@ -87,7 +88,7 @@ namespace MedicTalk
 			Parameters.Add("Visitor_d");
 			Parameters.Add("Visit_t");
 			ParameterValues = new List<string>();
-			ParameterValues.Add(form1.UserIDProperty.ToString());
+			ParameterValues.Add("4");
 			ParameterValues.Add(_firstName);
 			ParameterValues.Add(_lastName);
 			ParameterValues.Add(_date);
@@ -95,7 +96,7 @@ namespace MedicTalk
 			_time = _hour + ":" + _minute;
 	
 			_connect.Insert("INSERT INTO Visits (User_id, Visitor_first_name, Visitor_last_name, Visitor_date, Visit_time) VALUES (@User_id, @Visitor_fName, @Visitor_lName, @Visitor_d, @Visit_t);", Parameters, ParameterValues);
-			MessageBox.Show("You have registered your visit!");
+			_result = MessageBox.Show("You have registered your visit!");
 		}
 
 		private void button1_Click(object sender, EventArgs e)

@@ -145,6 +145,3 @@ C:\Users\burak\Desktop\LatestMediTalk\MediTalk\MedicTalk\obj\Debug\MedicTalk.Lis
 C:\Users\burak\Desktop\LatestMediTalk\MediTalk\MedicTalk\obj\Debug\MedicTalk.Order_Food.resources
 C:\Users\Jordan\Documents\Swinburne\DTAP\MediTalk\MedicTalk\obj\Debug\MedicTalk.Order_Food.resources
 C:\Users\Jordan\Documents\Swinburne\DTAP\MediTalk\MedicTalk\obj\Debug\MedicTalk.List_Of_Requests.resources
-C:\Users\Jordan\Documents\Swinburne\DTAP\MediTalk2\MediTalk-Version-2\MedicTalk\bin\Debug\MedicTalk.exe.config
-C:\Users\Jordan\Documents\Swinburne\DTAP\MediTalk2\MediTalk-Version-2\MedicTalk\obj\Debug\MedicTalk.exe
-C:\Users\Jordan\Documents\Swinburne\DTAP\MediTalk2\MediTalk-Version-2\MedicTalk\obj\Debug\MedicTalk.pdb

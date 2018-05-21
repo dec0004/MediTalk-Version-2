@@ -18,10 +18,10 @@ namespace MedicTalk
 		public Mysql_Connect _connect;
 		public Form1 form1;
 		Request_Emergency _request_emerg;
-
-        private string _mealType = "breakfast"; // The type of meal (Lunch, breakfast, etc)
-        private string _HotOrCold;
-        private string _chosenMealName;
+		public System.Windows.Forms.DialogResult chosenResult;
+		public string _mealType = "breakfast"; // The type of meal (Lunch, breakfast, etc)
+        public string _HotOrCold;
+        public string _chosenMealName;
 
 
 
@@ -65,7 +65,7 @@ namespace MedicTalk
 
 
         // What to do when cold checkbox is checked
-        private void ColdCheckbox_Checked(object sender, EventArgs e)
+        public void ColdCheckbox_Checked(object sender, EventArgs e)
         {
             _HotOrCold = "cold";
             HotCheckbox.Checked = false;
@@ -76,7 +76,7 @@ namespace MedicTalk
 
 
         // What to do when hot checkbox is checked
-        private void HotCheckBoxChecked(object sender, EventArgs e)
+        public void HotCheckBoxChecked(object sender, EventArgs e)
         {
             _HotOrCold = "hot";
             ColdCheckbox.Checked = false;
@@ -87,7 +87,7 @@ namespace MedicTalk
 
 
         // What to do when hot checkbox is checked
-        private void WarmCheckbox_Checked(object sender, EventArgs e)
+		public void WarmCheckbox_Checked(object sender, EventArgs e)
         {
             _HotOrCold = "warm";
             ColdCheckbox.Checked = false;
@@ -99,7 +99,7 @@ namespace MedicTalk
 
 
         // Update the combobox so that the correct food types are shown
-        private void Update_ComboxBox()
+        public void Update_ComboxBox()
         {
             this.MealSelection.Items.Clear();
 
@@ -122,7 +122,7 @@ namespace MedicTalk
 
 
         // Once a user has submitted their request for food
-        private void Submit_Clicked(object sender, EventArgs e)
+        public void Submit_Clicked(object sender, EventArgs e)
         {
             Requests_Handler.Add_Food(_chosenMealName, _HotOrCold, _mealType);
             MessageBox.Show("Your request has been recorded");
@@ -136,7 +136,7 @@ namespace MedicTalk
 
 		private void button3_Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("A nurse will be with you as soon as possible");
+			chosenResult = MessageBox.Show("A nurse will be with you as soon as possible");
 			_request_emerg.CallRequest();
 		}
 

@@ -28,7 +28,8 @@ namespace MedicTalk
 		public string _section;
 		public Mysql_Connect _connect;
 		private bool _commandResult;
-		private string User_Id;List<string> Keywords;
+		private string User_Id;
+		List<string> Keywords;
 		List<string> Parameters;
 		List<string> ParameterValues;
 		
@@ -64,7 +65,7 @@ namespace MedicTalk
 
 	
 
-        private void Login_Click(object sender, EventArgs e)
+        public void Login_Click(object sender, EventArgs e)
         {
 			User_Name = Username_Textbox.Text;
 			Password = Password_Textbox.Text;
@@ -198,6 +199,10 @@ namespace MedicTalk
 			{
 				return _room;
 			}
+			set
+			{
+				_room = value;
+			}
 		}
 
 
@@ -207,12 +212,20 @@ namespace MedicTalk
 			{
 				return _section;
 			}
+			set
+			{
+				_section = value;
+			}
 		}
 		public string FirstNameProperty
 		{
 			get
 			{
 				return _firstName;
+			}
+			set
+			{
+				_firstName = value;
 			}
 		}
 
@@ -221,6 +234,10 @@ namespace MedicTalk
 			get
 			{
 				return _lastName;
+			}
+			set
+			{
+				_lastName = value;
 			}
 		}
 

@@ -115,6 +115,7 @@
 			this.AlarmsList.RowTemplate.Height = 28;
 			this.AlarmsList.Size = new System.Drawing.Size(372, 178);
 			this.AlarmsList.TabIndex = 20;
+			this.AlarmsList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.AlarmsList_CellContentClick);
 			this.AlarmsList.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Remove_Alarm);
 			// 
 			// Youralarm
@@ -193,9 +194,9 @@
 		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.PictureBox pictureBox2;
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.ComboBox Hour_Box;
-		private System.Windows.Forms.ComboBox Minute_Box;
-		private System.Windows.Forms.DataGridView AlarmsList;
+		public System.Windows.Forms.ComboBox Hour_Box;
+		public System.Windows.Forms.ComboBox Minute_Box;
+		public System.Windows.Forms.DataGridView AlarmsList;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Button Submit_Button;
         private System.Windows.Forms.DataGridViewTextBoxColumn Youralarm;

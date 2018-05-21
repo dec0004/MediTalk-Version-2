@@ -22,7 +22,7 @@ namespace MedicTalk
 		List<string> Parameters;
 		List<string> ParameterValues;
 		public Request_Emergency _emergencyRequest;
-
+		public System.Windows.Forms.DialogResult result;
 		public Shower(HomePage _homePage, Mysql_Connect _connect, Form1 _form1)
 		{
 			_hour = "";
@@ -48,12 +48,12 @@ namespace MedicTalk
 		}
 
 
-		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+		public void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			_hour = comboBox1.Text;
 		}
 
-		private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+		public void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			_minute = comboBox2.Text;
 		}
@@ -66,7 +66,7 @@ namespace MedicTalk
 		}
 
 
-        private void Shower_Button_Changed(object sender, EventArgs e)
+        public void Shower_Button_Changed(object sender, EventArgs e)
         {
             _type = Shower_Button.Text;
         }
@@ -77,11 +77,11 @@ namespace MedicTalk
         }
 
 
-        private void Submit_Button_Click(object sender, EventArgs e)
+        public void Submit_Button_Click(object sender, EventArgs e)
         {
 
             Requests_Handler.Add_Timed_Request(_type, _hour + ":" + _minute + ":00");
-            MessageBox.Show("Your request has been acknowledged");
+            result = MessageBox.Show("Your request has been acknowledged");
             /*
             _time = _hour + ":" + _minute;
             Parameters = new List<string>();

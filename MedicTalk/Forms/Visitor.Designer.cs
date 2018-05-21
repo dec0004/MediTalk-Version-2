@@ -242,17 +242,17 @@
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.TextBox textBox1;
+		public System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.TextBox textBox2;
+		public System.Windows.Forms.TextBox textBox2;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.PictureBox pictureBox2;
-		private System.Windows.Forms.ComboBox comboBox1;
-		private System.Windows.Forms.ComboBox comboBox2;
+		public System.Windows.Forms.ComboBox comboBox1;
+		public System.Windows.Forms.ComboBox comboBox2;
 		private System.Windows.Forms.Label label7;
-		private System.Windows.Forms.DateTimePicker dateTimePicker1;
+		public System.Windows.Forms.DateTimePicker dateTimePicker1;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button3;
 	}

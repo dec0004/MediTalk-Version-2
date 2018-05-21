@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Data;
-
+using System.Windows.Forms;
+using System.Diagnostics;
 namespace MedicTalk
 {
     // This class will provide the functionality needed to view, and mark
@@ -14,17 +15,30 @@ namespace MedicTalk
     {
 
         static Mysql_Connect _MySQL = new Mysql_Connect();
-        private static DataTable dataTable;
-
-        public static DataTable DataTable
+        private static DataTable dataTable1;
+		private static DataTable dataTable2;
+		public static DataGridViewButtonColumn btn;
+		public static DataTable DataTable1
 		{
 			get
 			{
-				return dataTable;
+				return dataTable1;
 			}
 			set
 			{
-				dataTable = value;
+				dataTable1 = value;
+			}
+		}
+
+		public static DataTable DataTable2
+		{
+			get
+			{
+				return dataTable2;
+			}
+			set
+			{
+				dataTable2 = value;
 			}
 		}
 
@@ -68,24 +82,33 @@ namespace MedicTalk
         /// <param name="residentUID">Resident's user ID - needed to find the row in mysql</param>
         /// <param name="DateOfRequest">Date of request - needed to find the row in mysql</param>
         /// <param name="TimeOfRequest">Time of request - needed to find the row in mysql</param>
-        public static bool Complete_Request(string residentUID, string DateOfRequest, string TimeOfRequest)
+        public static bool Complete_Request(string timeOfRequest, string table)
         {
-            // Try marking request as complete and return true if it works
-            try
-            {
-                // TODO: Don't use Delete_Request function in this case
-                _MySQL.Delete_Request(
-                    "UPDATE NEWFoodRequests " +
-                    "SET Completed = 'y' " +
-                    "WHERE UID = '" + residentUID + "' " +
-                    " AND DateOfRequest = '" + DateOfRequest + 
-                    "' AND TimeOfRequest = '" + TimeOfRequest + "';");
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+			Debug.WriteLine(table);
+			string _timeofrequest = timeOfRequest;
+			// Try marking request as complete and return true if it works
+			if (table == "NEWFoodRequest")
+			{
+				Debug.WriteLine("cdavcadcvadvad");
+					// TODO: Don't use Delete_Request function in this case
+					_MySQL.Delete_Request(
+						"UPDATE NEWFoodRequests SET Completed = 'y' WHERE TimeOfRequest = @Time;", _timeofrequest);
+					return true;
+
+				
+			}
+			
+			else if (table == "NEWTimedRequest")
+			{
+					Debug.WriteLine("cdsc");
+					// TODO: Don't use Delete_Request function in this case
+					_MySQL.Delete_Request(
+						"UPDATE NEWTimedRequests SET Completed = 'y' WHERE TimeToComplete = @Time;", _timeofrequest);
+					return true;
+			
+			}
+			return false;
+			
         }
 
 
@@ -104,10 +127,10 @@ namespace MedicTalk
                     "INNER JOIN NEWFoodRequests Req ON Res.UID = Req.UID " +
                     "WHERE Completed != 'y' OR Completed IS NULL;" // Only show uncompleted requests
                     , _MySQL.connection);
-                DataTable = new DataTable();
-                mySqlDataAdapter_Food.Fill(DataTable);
-
-                _MySQL.CloseConnection();
+                DataTable1 = new DataTable();
+                mySqlDataAdapter_Food.Fill(DataTable1);
+				
+				_MySQL.CloseConnection();
             }
             else
             {
@@ -131,10 +154,12 @@ namespace MedicTalk
                     "FROM NEWUsers U " +
                     "INNER JOIN NEWResidents Res ON U.UID = Res.UID " +
                     "INNER JOIN NEWTimedRequests Req ON Res.UID = Req.UID " +
-                    "WHERE Req.TimeToComplete >= CURTIME()"
-                    , _MySQL.connection);
-                DataTable = new DataTable();
-                mySqlDataAdapter_Timed.Fill(DataTable);
+					"WHERE Completed != 'y' OR Completed IS NULL;"
+					, _MySQL.connection);
+                DataTable2 = new DataTable();
+				
+
+				mySqlDataAdapter_Timed.Fill(DataTable2);
 
                 _MySQL.CloseConnection();
             }
@@ -159,8 +184,8 @@ namespace MedicTalk
                     "WHERE TypeOfRequest = 'alarm' " +
                     "AND UID = '" + Mysql_User_Handler.User_ID + "';", _MySQL.connection);
 
-                DataTable = new DataTable();
-                mySqlDataAdapter_Alarm.Fill(DataTable);
+                DataTable1 = new DataTable();
+                mySqlDataAdapter_Alarm.Fill(DataTable1);
 
                 _MySQL.CloseConnection();
             }
@@ -175,10 +200,10 @@ namespace MedicTalk
             // Try deleting the alarm and return true if it works
             try
             {
-                _MySQL.Delete_Request(
-                    "DELETE FROM NEWTimedRequests " +
+                _MySQL.Delete_Request( "DELETE FROM NEWTimedRequests " +
                     "WHERE UID = '" + Mysql_User_Handler.User_ID + "' " +
-                    " AND TimeToComplete = '" + time + "';");
+                    " AND TimeToComplete = '" + time + "';", " ");
+                   
                 return true;
             }
             catch

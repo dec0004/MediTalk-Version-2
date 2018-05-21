@@ -153,8 +153,8 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.PictureBox pictureBox1;
-		private System.Windows.Forms.TextBox Username_Textbox;
-		private System.Windows.Forms.TextBox Password_Textbox;
+		public System.Windows.Forms.TextBox Username_Textbox;
+		public System.Windows.Forms.TextBox Password_Textbox;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.NotifyIcon notifyIcon1;

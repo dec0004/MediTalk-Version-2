@@ -189,11 +189,11 @@
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.PictureBox pictureBox2;
-		private System.Windows.Forms.CheckBox ColdCheckbox;
-		private System.Windows.Forms.CheckBox WarmCheckbox;
-		private System.Windows.Forms.CheckBox HotCheckbox;
+		public System.Windows.Forms.CheckBox ColdCheckbox;
+		public System.Windows.Forms.CheckBox WarmCheckbox;
+		public System.Windows.Forms.CheckBox HotCheckbox;
 		private System.Windows.Forms.Label MealType_Header;
-		private System.Windows.Forms.ComboBox MealSelection;
+		public System.Windows.Forms.ComboBox MealSelection;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.Button button3;
