@@ -45,12 +45,12 @@ namespace MediTalk
 
 			foreach (DataGridViewRow row in _alarm.AlarmsList.Rows)
 			{
-
-				if (row.Cells[0].Value.ToString() == "05:32:00")
-				{
+                Console.WriteLine("The value is: " + row.Cells[0].Value);
+                if (row.Cells[0].Value.ToString() == "05:32:00")
+                //if (row.Cells[0] != null)
+                {
 				    isThere = true;
 				}
-
 			}
 			Assert.AreEqual(isThere, true);
 		
