@@ -30,7 +30,7 @@
         {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-			this.RequestsList = new System.Windows.Forms.DataGridView();
+			this.Add_New_User_Button = new System.Windows.Forms.DataGridView();
 			this.Button = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,18 +52,20 @@
 			this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			((System.ComponentModel.ISupportInitialize)(this.RequestsList)).BeginInit();
+			this.button1 = new System.Windows.Forms.Button();
+			this.Visitor = new System.Windows.Forms.Button();
+			((System.ComponentModel.ISupportInitialize)(this.Add_New_User_Button)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// RequestsList
+			// Add_New_User_Button
 			// 
-			this.RequestsList.AllowUserToAddRows = false;
-			this.RequestsList.AllowUserToDeleteRows = false;
-			this.RequestsList.AllowUserToOrderColumns = true;
-			this.RequestsList.AllowUserToResizeColumns = false;
-			this.RequestsList.AllowUserToResizeRows = false;
-			this.RequestsList.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+			this.Add_New_User_Button.AllowUserToAddRows = false;
+			this.Add_New_User_Button.AllowUserToDeleteRows = false;
+			this.Add_New_User_Button.AllowUserToOrderColumns = true;
+			this.Add_New_User_Button.AllowUserToResizeColumns = false;
+			this.Add_New_User_Button.AllowUserToResizeRows = false;
+			this.Add_New_User_Button.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
 			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
 			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -73,9 +75,9 @@
 			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
 			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
 			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.RequestsList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-			this.RequestsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.RequestsList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+			this.Add_New_User_Button.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			this.Add_New_User_Button.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.Add_New_User_Button.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Button,
             this.FirstName,
             this.LastName,
@@ -87,14 +89,14 @@
             this.At,
             this.AtTime,
             this.UID});
-			this.RequestsList.GridColor = System.Drawing.SystemColors.ActiveCaption;
-			this.RequestsList.Location = new System.Drawing.Point(200, 104);
-			this.RequestsList.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.RequestsList.Name = "RequestsList";
-			this.RequestsList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.RequestsList.Size = new System.Drawing.Size(1500, 380);
-			this.RequestsList.TabIndex = 0;
-			this.RequestsList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FoodRequest_Completed);
+			this.Add_New_User_Button.GridColor = System.Drawing.SystemColors.ActiveCaption;
+			this.Add_New_User_Button.Location = new System.Drawing.Point(200, 104);
+			this.Add_New_User_Button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.Add_New_User_Button.Name = "Add_New_User_Button";
+			this.Add_New_User_Button.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.Add_New_User_Button.Size = new System.Drawing.Size(1500, 380);
+			this.Add_New_User_Button.TabIndex = 0;
+			this.Add_New_User_Button.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FoodRequest_Completed);
 			// 
 			// Button
 			// 
@@ -280,6 +282,28 @@
 			this.Column7.HeaderText = "TimeToComplete";
 			this.Column7.Name = "Column7";
 			// 
+			// button1
+			// 
+			this.button1.BackgroundImage = global::MedicTalk.Properties.Resources.Login_Page4;
+			this.button1.Location = new System.Drawing.Point(200, 54);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(157, 42);
+			this.button1.TabIndex = 5;
+			this.button1.Text = "Add new user";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.button1_Click);
+			// 
+			// Visitor
+			// 
+			this.Visitor.BackgroundImage = global::MedicTalk.Properties.Resources.Login_Page2;
+			this.Visitor.Location = new System.Drawing.Point(379, 54);
+			this.Visitor.Name = "Visitor";
+			this.Visitor.Size = new System.Drawing.Size(162, 42);
+			this.Visitor.TabIndex = 6;
+			this.Visitor.Text = "Visitor Sign-in";
+			this.Visitor.UseVisualStyleBackColor = true;
+			this.Visitor.Click += new System.EventHandler(this.Visitor_Click);
+			// 
 			// List_Of_Requests
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -287,17 +311,19 @@
 			this.BackgroundImage = global::MedicTalk.Properties.Resources.Home_Background1;
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.ClientSize = new System.Drawing.Size(1478, 968);
+			this.Controls.Add(this.Visitor);
+			this.Controls.Add(this.button1);
 			this.Controls.Add(this.dataGridView1);
 			this.Controls.Add(this.TimedRequest_Header);
 			this.Controls.Add(this.FoodRequests_Header);
-			this.Controls.Add(this.RequestsList);
+			this.Controls.Add(this.Add_New_User_Button);
 			this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.Name = "List_Of_Requests";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "List_Of_Requests";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 			this.Load += new System.EventHandler(this.List_Of_Requests_Load);
-			((System.ComponentModel.ISupportInitialize)(this.RequestsList)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Add_New_User_Button)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -306,7 +332,7 @@
 
         #endregion
 
-        public System.Windows.Forms.DataGridView RequestsList;
+        public System.Windows.Forms.DataGridView Add_New_User_Button;
         private System.Windows.Forms.Label FoodRequests_Header;
         private System.Windows.Forms.Label TimedRequest_Header;
 		private System.Windows.Forms.DataGridViewButtonColumn Column1;
@@ -328,5 +354,7 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn At;
 		private System.Windows.Forms.DataGridViewTextBoxColumn AtTime;
 		private System.Windows.Forms.DataGridViewTextBoxColumn UID;
+		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button Visitor;
 	}
 }

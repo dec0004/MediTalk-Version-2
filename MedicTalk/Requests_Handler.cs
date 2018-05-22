@@ -61,12 +61,19 @@ namespace MedicTalk
                 "VALUES ('" + Mysql_User_Handler.User_ID + "', '" + type + "', '" + timeToComplete + "');");
         }
 
+		public static void Add_Visitor(string FirstName, string LastName, string PersonVisiting, string timeToComplete)
+		{
+			// Insert the time
+			_MySQL.Insert_Request(
+				"INSERT NEWVisitorIn (First_Name, Last_Name, Person_Visiting, Time_In) " +
+				"VALUES ('" + FirstName+ "', '" + LastName + "', '" + PersonVisiting + "', '" + timeToComplete + "');");
+		}
 
 
-        /// <summary>
-        /// Add food request made by the resident into the database
-        /// </summary>
-        public static void Add_Food(string foodName, string HotOrCold, string MealType)
+		/// <summary>
+		/// Add food request made by the resident into the database
+		/// </summary>
+		public static void Add_Food(string foodName, string HotOrCold, string MealType)
         {
             Console.WriteLine(
                 "INSERT INTO NEWFoodRequests (UID, MealType, HotOrCold, MealName, TimeOfRequest, DateOfRequest) " +
@@ -93,7 +100,6 @@ namespace MedicTalk
 			// Try marking request as complete and return true if it works
 			if (table == "NEWFoodRequest")
 			{
-				Debug.WriteLine("cdavcadcvadvad");
 					// TODO: Don't use Delete_Request function in this case
 					_MySQL.Delete_Request(
 						"UPDATE NEWFoodRequests SET Completed = 'y' WHERE TimeOfRequest = @Time;", _timeofrequest);
@@ -101,15 +107,21 @@ namespace MedicTalk
 
 				
 			}
-			
 			else if (table == "NEWTimedRequest")
 			{
-					Debug.WriteLine("cdsc");
 					// TODO: Don't use Delete_Request function in this case
 					_MySQL.Delete_Request(
 						"UPDATE NEWTimedRequests SET Completed = 'y' WHERE TimeToComplete = @Time;", _timeofrequest);
 					return true;
 			
+			}
+			else if (table == "NEWVisitorSignIn")
+			{
+				// TODO: Don't use Delete_Request function in this case
+				_MySQL.Delete_Request(
+					"UPDATE NEWVisitorIn SET Completed = 'y', Time_Out = NOW() WHERE Time_In = @Time;", _timeofrequest);
+				return true;
+
 			}
 			return false;
 			
@@ -142,11 +154,31 @@ namespace MedicTalk
             }
         }
 
+		public static void Show_Visitors()
+		{
+			if (_MySQL.OpenConnection())
+			{
+				MySqlDataAdapter mySqlDataAdapter_Visitor = new MySqlDataAdapter(
+					// "SELECT U.UID, U.FirstName, U.LastName, Res.Room, Res.Section, Req.MealType, Req.HotOrCold, Req.MealName, Req.DateOfRequest, Req.TimeOfRequest, Req.Completed FROM NEWUsers U " +
 
-        /// <summary>
-        /// Show requests that must be done at a specific time
-        /// </summary>
-        public static void Show_Timed_Requests()
+					"SELECT First_Name, Last_Name, Person_Visiting, Time_In, Time_Out FROM NEWVisitorIn;" // Only show uncompleted requests
+					, _MySQL.connection);
+				DataTable1 = new DataTable();
+				mySqlDataAdapter_Visitor.Fill(DataTable1);
+
+				_MySQL.CloseConnection();
+			}
+			else
+			{
+				Console.WriteLine("Could not open connection");
+			}
+		}
+
+
+		/// <summary>
+		/// Show requests that must be done at a specific time
+		/// </summary>
+		public static void Show_Timed_Requests()
         {            
             if (_MySQL.OpenConnection())
             {

@@ -129,7 +129,7 @@ namespace MedicTalk
 		{
 
 			MySqlCommand _command = new MySqlCommand();
-
+	
 			if (this.OpenConnection() == true)
 			{
 				_command.CommandText = _inputCommand;
@@ -138,7 +138,8 @@ namespace MedicTalk
 				{
 					//A list of parameters have to be supplied due to an insert statement always having
 					//varying parameters
-
+					//Console.Write("@" + parameterKey[i] + parameterValues[i]);
+					
 					_command.Parameters.AddWithValue("@" + parameterKey[i], parameterValues[i]);
 					
 				}

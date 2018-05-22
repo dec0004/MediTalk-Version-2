@@ -28,9 +28,9 @@ namespace MediTalk
 			_home = new HomePage(_form1, _mysql);
 			_list = new MedicTalk.List_Of_Requests(_form1, _mysql);
 			_list.Display_Lists();
-			int numrows = _list.RequestsList.Rows.Count;
+			int numrows = _list.Add_New_User_Button.Rows.Count;
 			_list.FoodRequest_Completed(new object(), new DataGridViewCellEventArgs(1,1));
-			int newNumRows = _list.RequestsList.Rows.Count;
+			int newNumRows = _list.Add_New_User_Button.Rows.Count;
 			Assert.AreNotEqual(numrows, newNumRows);
 		}
 
