@@ -28,7 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.button1 = new System.Windows.Forms.Button();
 			this.Add_New_User_Button = new System.Windows.Forms.DataGridView();
@@ -54,8 +54,10 @@
 			// 
 			// pictureBox1
 			// 
+			this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
 			this.pictureBox1.BackgroundImage = global::MedicTalk.Properties.Resources.MediTalk_Heading;
+			this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.pictureBox1.Location = new System.Drawing.Point(667, 12);
 			this.pictureBox1.Name = "pictureBox1";
 			this.pictureBox1.Size = new System.Drawing.Size(171, 42);
@@ -65,6 +67,7 @@
 			// button1
 			// 
 			this.button1.BackgroundImage = global::MedicTalk.Properties.Resources.Icon_Return;
+			this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.button1.Location = new System.Drawing.Point(4, 5);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(88, 85);
@@ -79,17 +82,18 @@
 			this.Add_New_User_Button.AllowUserToOrderColumns = true;
 			this.Add_New_User_Button.AllowUserToResizeColumns = false;
 			this.Add_New_User_Button.AllowUserToResizeRows = false;
+			this.Add_New_User_Button.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
 			this.Add_New_User_Button.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
-			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle4.Format = "d";
-			dataGridViewCellStyle4.NullValue = null;
-			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.Add_New_User_Button.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle6.Format = "d";
+			dataGridViewCellStyle6.NullValue = null;
+			dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.Add_New_User_Button.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
 			this.Add_New_User_Button.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.Add_New_User_Button.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Sign_Out,
@@ -99,11 +103,11 @@
             this.Time_In,
             this.Time_Out});
 			this.Add_New_User_Button.GridColor = System.Drawing.SystemColors.ActiveCaption;
-			this.Add_New_User_Button.Location = new System.Drawing.Point(135, 285);
+			this.Add_New_User_Button.Location = new System.Drawing.Point(351, 285);
 			this.Add_New_User_Button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.Add_New_User_Button.Name = "Add_New_User_Button";
 			this.Add_New_User_Button.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.Add_New_User_Button.Size = new System.Drawing.Size(1237, 380);
+			this.Add_New_User_Button.Size = new System.Drawing.Size(789, 380);
 			this.Add_New_User_Button.TabIndex = 15;
 			this.Add_New_User_Button.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Add_New_User_Button_CellContentClick);
 			// 
@@ -114,14 +118,14 @@
 			// 
 			// FirstName
 			// 
-			this.FirstName.DataPropertyName = "FirstName";
+			this.FirstName.DataPropertyName = "First_Name";
 			this.FirstName.HeaderText = "First name";
 			this.FirstName.Name = "FirstName";
 			this.FirstName.ReadOnly = true;
 			// 
 			// LastName
 			// 
-			this.LastName.DataPropertyName = "LastName";
+			this.LastName.DataPropertyName = "Last_Name";
 			this.LastName.HeaderText = "Last name";
 			this.LastName.Name = "LastName";
 			this.LastName.ReadOnly = true;
@@ -136,7 +140,7 @@
 			// 
 			// Time_In
 			// 
-			this.Time_In.DataPropertyName = "Section";
+			this.Time_In.DataPropertyName = "Time_In";
 			this.Time_In.HeaderText = "Time In";
 			this.Time_In.Name = "Time_In";
 			this.Time_In.ReadOnly = true;
@@ -144,13 +148,14 @@
 			// 
 			// Time_Out
 			// 
-			this.Time_Out.DataPropertyName = "MealName";
+			this.Time_Out.DataPropertyName = "Time_Out";
 			this.Time_Out.HeaderText = "Time Out";
 			this.Time_Out.Name = "Time_Out";
 			this.Time_Out.ReadOnly = true;
 			// 
 			// pictureBox2
 			// 
+			this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.pictureBox2.BackgroundImage = global::MedicTalk.Properties.Resources.Plain_Background;
 			this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.pictureBox2.Location = new System.Drawing.Point(135, 60);
@@ -161,6 +166,7 @@
 			// 
 			// Visitor_Sign_In
 			// 
+			this.Visitor_Sign_In.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.Visitor_Sign_In.AutoSize = true;
 			this.Visitor_Sign_In.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.Visitor_Sign_In.Location = new System.Drawing.Point(634, 64);
@@ -171,6 +177,7 @@
 			// 
 			// First_Name_Textbox
 			// 
+			this.First_Name_Textbox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.First_Name_Textbox.Location = new System.Drawing.Point(913, 176);
 			this.First_Name_Textbox.Name = "First_Name_Textbox";
 			this.First_Name_Textbox.Size = new System.Drawing.Size(197, 26);
@@ -179,6 +186,7 @@
 			// 
 			// label1
 			// 
+			this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.label1.AutoSize = true;
 			this.label1.Location = new System.Drawing.Point(453, 152);
 			this.label1.Name = "label1";
@@ -188,6 +196,7 @@
 			// 
 			// Last
 			// 
+			this.Last.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.Last.AutoSize = true;
 			this.Last.Location = new System.Drawing.Point(710, 151);
 			this.Last.Name = "Last";
@@ -197,6 +206,7 @@
 			// 
 			// Last_Name_Textbox
 			// 
+			this.Last_Name_Textbox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.Last_Name_Textbox.Location = new System.Drawing.Point(654, 176);
 			this.Last_Name_Textbox.Name = "Last_Name_Textbox";
 			this.Last_Name_Textbox.Size = new System.Drawing.Size(197, 26);
@@ -205,6 +215,7 @@
 			// 
 			// label2
 			// 
+			this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.label2.AutoSize = true;
 			this.label2.Location = new System.Drawing.Point(955, 150);
 			this.label2.Name = "label2";
@@ -214,6 +225,7 @@
 			// 
 			// Person_Visiting_Textbox
 			// 
+			this.Person_Visiting_Textbox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.Person_Visiting_Textbox.Location = new System.Drawing.Point(397, 176);
 			this.Person_Visiting_Textbox.Name = "Person_Visiting_Textbox";
 			this.Person_Visiting_Textbox.Size = new System.Drawing.Size(197, 26);
@@ -222,17 +234,21 @@
 			// 
 			// button2
 			// 
+			this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.button2.Image = global::MedicTalk.Properties.Resources.Icon_Submitted;
 			this.button2.Location = new System.Drawing.Point(687, 223);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(132, 31);
 			this.button2.TabIndex = 24;
 			this.button2.UseVisualStyleBackColor = true;
+			this.button2.Click += new System.EventHandler(this.button2_Click);
 			// 
 			// Visitor_Signin
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoSize = true;
+			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.BackgroundImage = global::MedicTalk.Properties.Resources.Home_Background;
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.ClientSize = new System.Drawing.Size(1478, 968);
@@ -251,6 +267,7 @@
 			this.Name = "Visitor_Signin";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Visitor_Signin";
+			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.Add_New_User_Button)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

@@ -114,6 +114,8 @@ namespace MedicTalk
 		private void Visitor_Click(object sender, EventArgs e)
 		{
 			_visitor = new Visitor_Signin( this, _connect, form1);
+			this.Hide();
+			_visitor.Show();
 		}
 	}
 }
