@@ -159,20 +159,21 @@ namespace MedicTalk
         // </summary>
 		public string Count(string _inputCommand)
 		{
+			rows = null;
 			MySqlCommand _command = new MySqlCommand();
 			if (this.OpenConnection() == true)
 			{
 				_command.CommandText = _inputCommand;
 				_command.Connection = connection;
-				MySqlDataReader _reader = _command.ExecuteReader();
-				while (_reader.Read())
-				{
-					for (int i = 0; i < 1; i++)
-					{
-						rows += _reader[0];
-					}
+				//MySqlDataReader _reader = _command.ExecuteReader();
+				//while (_reader.Read())
+				//	{
+				int count = Convert.ToInt32(_command.ExecuteScalar());
+				rows = count.ToString();
+					//	rows += _reader[0];
+						//rows = rows.Substring(0, 1);
 					
-				}
+			///	}
 			}
 			this.CloseConnection();
 			return rows;
