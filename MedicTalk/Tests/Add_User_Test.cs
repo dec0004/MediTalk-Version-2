@@ -60,15 +60,16 @@ namespace MediTalk
 			_form1.PasswordProperty = "resident";
 			_form1.Login_Click(new object(), EventArgs.Empty);
 
-			rowCount = _mysql.Count("SELECT * FROM NEWUsers");
+			rowCount = _mysql.Count("SELECT COUNT(*) FROM NEWUsers");
 			_mysql.Insert_Request("INSERT INTO NEWUsers ( UserName, FirstName, LastName, Password) " + "VALUES ('" + UserName + "','" + FirstName + "','" + LastName + "','" + Password + "');"); 
-			newRowCount = _mysql.Count("SELECT * FROM NEWUsers");
-		
+			newRowCount = _mysql.Count("SELECT COUNT(*) FROM NEWUsers");
+
+
 			Assert.AreNotEqual(rowCount, newRowCount);
 
-			rowCount = _mysql.Count("SELECT * FROM NEWResidents");
-			_mysql.Insert_Request("INSERT INTO NEWResidents (UID, FirstName, LastName, Room, Section, Age) " + "VALUES (26, '" + FirstName + "','" + LastName + "','" + "43', 'D3', 43);");
-			newRowCount = _mysql.Count("SELECT * FROM NEWResidents");
+			rowCount = _mysql.Count("SELECT COUNT(*) FROM NEWResidents");
+			_mysql.Insert_Request("INSERT INTO NEWResidents (UID, FirstName, LastName, Room, Section, Age) " + "VALUES (28, '" + FirstName + "','" + LastName + "','" + "43', 'D3', 43);");
+			newRowCount = _mysql.Count("SELECT COUNT(*) FROM NEWResidents");
 			Assert.AreNotEqual(rowCount, newRowCount);
 		}
 	}

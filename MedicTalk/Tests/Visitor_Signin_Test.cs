@@ -30,7 +30,7 @@ namespace MediTalk
 			_list = new List_Of_Requests(_form1, _mysql);
 			_visitor = new Visitor_Signin(_list, _mysql, _form1);
 
-			
+
 			string FirstName = "dec0004";
 			string LastName = "J";
 			string PersonVisiting = "fdf";
@@ -42,17 +42,35 @@ namespace MediTalk
 			_form1.PasswordProperty = "resident";
 			_form1.Login_Click(new object(), EventArgs.Empty);
 
-			rowCount = _mysql.Count("SELECT * FROM NEWVisitorIn");
-			_mysql.Insert_Request("INSERT INTO NEWVisitorIn (First_Name, Last_Name, Person_Visiting, Time_In) " + "VALUES ('"  + FirstName + "','" + LastName + "','" + PersonVisiting + "','" + DateTime.Now.TimeOfDay + "');");
-			newRowCount = _mysql.Count("SELECT * FROM NEWVisitorIn");
+			rowCount = _mysql.Count("SELECT COUNT(*) FROM NEWVisitorIn");
+			_mysql.Insert_Request("INSERT INTO NEWVisitorIn (First_Name, Last_Name, Person_Visiting, Time_In) " + "VALUES ('" + FirstName + "','" + LastName + "','" + PersonVisiting + "','" + DateTime.Now.TimeOfDay + "');");
+			newRowCount = _mysql.Count("SELECT COUNT(*) FROM NEWVisitorIn");
 
 			Assert.AreNotEqual(rowCount, newRowCount);
 
-		
+
 		}
 
 		[Test]
 		public void Test_Visitors_Show()
+		{
+			_form1 = new Form1();
+			_mysql = new Mysql_Connect();
+			_list = new List_Of_Requests(_form1, _mysql);
+			_visitor = new Visitor_Signin(_list, _mysql, _form1);
+
+
+
+			bool exists = _mysql.DataExists("NEWVisitorIn", "First_Name = 'dec0004'");
+			
+
+			Assert.IsTrue(exists);
+
+
+		}
+
+		[Test]
+		public void Test_Visitors_List_Clears()
 		{
 			_form1 = new Form1();
 			_mysql = new Mysql_Connect();
@@ -67,12 +85,14 @@ namespace MediTalk
 			_form1.Login_Click(new object(), EventArgs.Empty);
 
 
-			bool exists = _mysql.DataExists("NEWVisitorIn", "First_Name = 'dec0004'");
-
-
-			Assert.IsTrue(exists);
-
-
+			_mysql.Insert_Request("INSERT INTO NEWVisitorIn (First_Name, Last_Name, Person_Visiting, Time_In) VALUES ('Jordan', 'de carheil', 'amandasswdc', '12:00:21');");
+			_mysql.Insert_Request("INSERT INTO NEWVisitorIn (First_Name, Last_Name, Person_Visiting, Time_In) VALUES ('Jordan', 'de carheil', 'amandasswdc', '12:00:23');");
+			rowCount = _mysql.Count("SELECT COUNT(*) FROM NEWVisitorIn");
+			Console.WriteLine(rowCount);
+			_mysql.Delete_Request("DELETE FROM NEWVisitorIn", null);
+			newRowCount = _mysql.Count("SELECT COUNT(*) FROM NEWVisitorIn");
+			Console.WriteLine(newRowCount);
+			Assert.AreNotEqual(rowCount, newRowCount);
 		}
 	}
 }
