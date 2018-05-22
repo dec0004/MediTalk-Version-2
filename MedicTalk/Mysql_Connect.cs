@@ -80,6 +80,12 @@ namespace MedicTalk
         // </summary>
         public void Insert_Request(string query)
         {
+
+            // Change the time zone to match Melbourne's
+            // Need to do call this every time since we 
+            // don't have super privilege in MySQL
+            Change_Timezone(); 
+
             MySqlCommand _command = new MySqlCommand();
             if (this.OpenConnection())
             {
@@ -93,6 +99,7 @@ namespace MedicTalk
 
             this.CloseConnection();
         }
+
 
         // <summary>
         // Mark a request as complete. Once marked as completed, a request will no longer 
@@ -182,10 +189,21 @@ namespace MedicTalk
         // <summary>
         // Used to update an entry in the database
         // </summary>
-        public void Update()
+        public void Update(string table, string queryToRun)
 		{
+            MySqlCommand _command = new MySqlCommand();
 
-		}
+            queryToRun = "UPDATE " + table + " " + queryToRun;
+            
+            if (this.OpenConnection())
+            {
+                _command.CommandText = queryToRun;
+                _command.Connection = connection;
+
+                _command.ExecuteNonQuery();
+            }
+            this.CloseConnection();
+        }
 
 
 
@@ -346,6 +364,24 @@ namespace MedicTalk
                 _command.ExecuteNonQuery(); // Execute the command
             }
 
+            this.CloseConnection();
+        }
+
+        /// <summary>
+        /// Used to change the CURTIME() for mysq
+        /// </summary>
+        public void Change_Timezone()
+        {
+            MySqlCommand _command = new MySqlCommand();
+            string query = "SET time_zone = 'Australia/Melbourne';";
+
+            if (this.OpenConnection())
+            {
+                _command.CommandText = query;
+                _command.Connection = connection;
+
+                _command.ExecuteNonQuery();
+            }
             this.CloseConnection();
         }
     }

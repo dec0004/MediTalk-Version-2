@@ -31,6 +31,10 @@ namespace MedicTalk
 			{
 				return _user_ID;
 			}
+            set
+            {
+                _user_ID = value;
+            }
         }
 
 
