@@ -17,22 +17,21 @@ namespace MedicTalk
     {
         public Mysql_Connect _mysql = new Mysql_Connect();
 
-
-
-
         // Staff should be able to add an incident report for a specified resident
         [Test]
         public void Staff_should_add_incidents()
         {
             string theIncident = "Resident refused to take their medicine";
+            // Add the incident
+            Incidents.Add_Incident("5", theIncident);
             // It should only pass if the incident now exists in the database
-            Assert.IsTrue(_mysql.DataExists(
-                "Incidents", "UID = '" + Mysql_User_Handler.User_ID + 
-                "' AND IncidentDescription = '" + theIncident + "';"));
+            string[] columnsToCheck = { "UID", "IncidentDescription"};
+            string[] columnValues = { "5", theIncident};
+
+            Assert.IsTrue(_mysql.DataDoesExist("Incidents", columnsToCheck, columnValues));
 
             // Remove the test entry from the database
-            _mysql.Delete("DELETE FROM Incidents where UID = '" + 
-                Mysql_User_Handler.User_ID + "' AND IncidentDescription = '" + theIncident + "';");
+            _mysql.Delete_Entries("5", "Incidents", columnsToCheck, columnValues);
         }
 
 
@@ -43,24 +42,26 @@ namespace MedicTalk
         public void Staff_should_update_incident_details()
         {
             // First add a sample incident to the database. 
-            Mysql_User_Handler.User_ID = "5"; // ID of test user
             string theIncident = "Resident refused to take their medicine";
-            Incidents.Add_Incident(theIncident);
+
+            // User ID is 5
+            Incidents.Add_Incident("5", theIncident);
 
             // Change the description
             string updatedDesc = "Resident refused to take their medicine, SuperDrug. They became aggressive" +
-                "when confronted by staff";
+                " when confronted by staff";
 
             // Update the entry
-            Incidents.Update_Incident(Mysql_User_Handler.User_ID, theIncident, updatedDesc);
+            Incidents.Update_Incident("5", theIncident, updatedDesc);
+           
+            string[] columnNames = { "UID", "IncidentDescription" };
+            string[] columnExpectedValues = { "5", updatedDesc };
 
             // Test passes if the entry has changed
-            Assert.IsTrue(_mysql.DataExists(
-                "Incidents", "UID = '" + Mysql_User_Handler.User_ID +
-                "' AND IncidentDescription = '" + updatedDesc + "';"));
+            Assert.IsTrue(_mysql.DataDoesExist("Incidents", columnNames, columnExpectedValues));
 
-            _mysql.Delete("DELETE FROM Incidents where UID = '" +
-                Mysql_User_Handler.User_ID + "' AND IncidentDescription = '" + updatedDesc + "';");
+            // Delete once done
+            _mysql.Delete_Entries("5", "Incidents", columnNames, columnExpectedValues);
         }
 
 
@@ -71,19 +72,28 @@ namespace MedicTalk
         [Test]
         public void Staff_should_see_list_of_users_incidents()
         {
-
             // It should only pass if it finds the incident reports from the database
-            Assert.Fail();
+            Assert.IsTrue(Incidents.Get_Incidents_By_Name("resident"));
         }
 
 
 
-        // Staff should be able to search for a resident by name.
+        // Staff should be able to search for a resident by name. This test will test the functionality
+        // of the GUI.
         [Test]
         public void Staff_should_search_resident_by_name()
         {
+            // Add an incident before hand
+            string theIncident = "Resident dropped item on their foot.";
+            Incidents.Add_Incident("5", theIncident);
+
             // Test should only pass if the program returns the name of the resident the user was searching for
-            Assert.Fail();
+            Assert.IsTrue(Incidents.Get_Incidents_By_Name("resident"));
+
+            // Delete the entry once done
+            string[] columnNames = { "UID", "IncidentDescription" };
+            string[] columnExpectedValues = { "5", theIncident };
+            _mysql.Delete_Entries("5", "Incidents", columnNames, columnExpectedValues);
         }
 
 
@@ -93,7 +103,7 @@ namespace MedicTalk
         public void Staff_should_search_by_date()
         {
             // Test should only pass if the program returns the incidents for a given time period and not before or after
-            Assert.Fail();
+            Assert.IsTrue(Incidents.Get_Incidents_By_Date("2018-05-23"));
         }
     }
 }

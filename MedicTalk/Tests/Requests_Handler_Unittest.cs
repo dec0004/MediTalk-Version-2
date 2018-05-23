@@ -13,7 +13,7 @@ namespace MediTalk
     {
         public HomePage _home; // From for the resdient's homepage
         public Form1 _form1; // Login form
-        public Mysql_Connect _mysql;
+        public Mysql_Connect _mysql; // TODO: REMOVE ONE
         public Order_Food _food; // Form for food orders
         Mysql_Connect mysql_handler = new Mysql_Connect(); // The class that handles mysql functions
 

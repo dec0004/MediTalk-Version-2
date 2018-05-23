@@ -81,14 +81,15 @@ namespace MedicTalk
         public void Insert_Request(string query)
         {
 
-            // Change the time zone to match Melbourne's
-            // Need to do call this every time since we 
-            // don't have super privilege in MySQL
-            Change_Timezone(); 
-
             MySqlCommand _command = new MySqlCommand();
+
             if (this.OpenConnection())
             {
+                // Change the time zone to match Melbourne's. Need to do call 
+                // this every time we establish a connection since we 
+                // don't have super privilege in MySQL
+                Change_Timezone(_command);
+                
                 _command.CommandText = query;
                 _command.Connection = connection;
 
@@ -99,6 +100,178 @@ namespace MedicTalk
 
             this.CloseConnection();
         }
+
+
+        public void Insert_With_Params()
+        {
+
+        }
+
+        /// <summary>
+        /// Replaces a value in a column. 
+        /// </summary>
+        /// <param name="tableName">Name of the table</param>
+        /// <param name="columnName">Name of column being changed</param>
+        /// <param name="oldValue">The old value that will be replaced</param>
+        /// <param name="newValue">The </param>
+        public void Update_Replace_Value(string UID, string tableName, string columnName, string oldValue, string newValue)
+        {
+            MySqlCommand _command = new MySqlCommand();
+
+            if (this.OpenConnection())
+            {
+                // Add parameters and execute the command to MySQL database
+                _command.Connection = connection;
+                _command.CommandText = 
+                    "Update " + tableName +
+                    " SET " + columnName + " = @newValue " +
+                    "WHERE UID = @UID AND " + columnName + " = @oldValue;";
+                _command.Parameters.AddWithValue("@newValue", newValue);
+                _command.Parameters.AddWithValue("@oldValue", oldValue);
+                _command.Parameters.AddWithValue("@UID", UID);
+                _command.ExecuteNonQuery();
+
+
+                // Below code is used to log the command for debugging purposes. Outputs the command that's given to MySQL
+                string query = _command.CommandText;
+                foreach (MySqlParameter p in _command.Parameters)
+                {
+                    query = query.Replace(p.ParameterName, p.Value.ToString());
+                }
+                Console.WriteLine(query);
+            }
+            this.CloseConnection();
+        }
+
+
+        /// <summary>
+        /// Deletes entries in the database. ColumnsToCheck and ColumnExpectedValues 
+        /// array must be of equal length. 
+        /// </summary>
+        /// <param name="TableName">Name of table to alter</param>
+        /// <param name="ColumnsToCheck">Which columns should be checked using WHERE clause</param>
+        /// <param name="ColumnExpectedValues">Deletes entries that have this value in ColumnsToCheck</param>
+        public void Delete_Entries(string uid, string TableName, string[] ColumnsToCheck, string[] ColumnExpectedValues)
+        {
+            // There must be an equal amount of entries for both ColumnsToCheck and ColumnExpectedValues
+            if (ColumnsToCheck.Length != ColumnExpectedValues.Length)
+            {
+                throw new InvalidOperationException("The array lengths in the arguments for Delete_Entries must be equal length");
+            }
+
+            MySqlCommand _command = new MySqlCommand();
+
+            if (this.OpenConnection())
+            {
+                // Add parameters and execute the command to MySQL database
+                _command.Connection = connection;
+                _command.CommandText = "DELETE FROM " + TableName + " WHERE ";
+                _command.Parameters.AddWithValue("@UID", uid);
+
+                // Get the column length
+                int AmtOfColumns = ColumnsToCheck.Length;
+
+                // Loop through and add parameter for each value so the statement looks like:
+                // WHERE ....  Column1 = Value1, Column2 = Value2, etc, etc
+                for (int i = 0;i < AmtOfColumns;i++)
+                {
+                    _command.CommandText += ColumnsToCheck[i] + " = @ColumnExpectedValue" + i.ToString();
+                    _command.Parameters.AddWithValue("@ColumnExpectedValue" + i.ToString(), ColumnExpectedValues[i]);
+                    if (i < AmtOfColumns - 1)
+                    {
+                        _command.CommandText += " AND ";
+                    }
+                }
+                _command.ExecuteNonQuery(); // Execute the command
+
+                // For logging purposes
+                string query = _command.CommandText;
+                foreach (MySqlParameter p in _command.Parameters)
+                {
+                    query = query.Replace(p.ParameterName, p.Value.ToString());
+                }
+                //Console.WriteLine(query);
+            }
+            this.CloseConnection();
+        }
+
+        #region Add_Entries_Unused
+        /*
+        /// <summary>
+        /// Add entry to a database.
+        /// </summary>
+        /// <param name="tableName">Name of table</param>
+        /// <param name="ColumnNames">Columns to insert values into</param>
+        /// <param name="ColumnValue">Values for the columns</param>
+        public void Add_Entries(string tableName, string[] ColumnNames, string[] ColumnValue)
+        {
+            // There must be an equal amount of entries for both ColumnsToCheck and ColumnExpectedValues
+            if (ColumnNames.Length != ColumnValue.Length)
+            {
+                throw new InvalidOperationException("The array lengths in the arguments for Add_Entries must be equal length");
+            }
+
+            MySqlCommand _command = new MySqlCommand();
+
+            if (this.OpenConnection())
+            {
+                // Add parameters and execute the command to MySQL database
+                _command.Connection = connection;
+                _command.CommandText = "INSERT INTO " + tableName;
+                _command.Parameters.AddWithValue("@UID", Mysql_User_Handler.User_ID);
+
+                // Get the column length
+                int AmtOfColumns = ColumnNames.Length;
+
+                // Loop through each value to insert
+                _command.CommandText += " (";
+                // Add column names to the MySQL statement
+                for (int i = 0; i < AmtOfColumns; i++)
+                {
+                    _command.CommandText += ColumnNames[i];
+                    
+                    // Add comma if not the final column in the statement
+                    if (i < AmtOfColumns - 1)
+                    {
+                        _command.CommandText += ", ";
+                    }
+                }
+                _command.CommandText += ") VALUES (";
+
+                // Add column values to the MySQL statement
+                for (int i = 0; i < AmtOfColumns; i++)
+                {
+                    // If a date or time is inserted, don't insert as parameter
+                    if (ColumnValue[i] == "CURTIME()" || ColumnValue[i] == "CURDATE()")
+                    {
+
+                    }
+
+                    _command.CommandText += "@ColumnValue" + i.ToString();
+                    _command.Parameters.AddWithValue("@ColumnValue" + i.ToString(), ColumnValue[i]);
+
+                    if (i < AmtOfColumns - 1)
+                    {
+                        _command.CommandText += ", ";
+                    }
+                }
+
+                _command.CommandText += ");";
+                _command.ExecuteNonQuery(); // Execute the command
+
+                // For logging purposes
+                string query = _command.CommandText;
+                foreach (MySqlParameter p in _command.Parameters)
+                {
+                    query = query.Replace(p.ParameterName, p.Value.ToString());
+                }
+                Console.WriteLine("NEW QUERY = " + query);
+            }
+            this.CloseConnection();
+        }
+        */
+
+        #endregion
 
 
         // <summary>
@@ -238,6 +411,59 @@ namespace MedicTalk
         }
 
 
+        /// <summary>
+        /// Checks if data exists in database given the parameters.
+        /// </summary>
+        /// <param name="tableName">Name of table</param>
+        /// <param name="columnNames">Name of all columns to check</param>
+        /// <param name="ColumnExpectedValue">Expected values in each column</param>
+        /// <returns></returns>
+        public bool DataDoesExist(string tableName, string[] columnNames, string[] ColumnExpectedValue)
+        {
+            MySqlCommand _command = new MySqlCommand();
+            bool dataExists = false; // Will be returned at the end
+
+            if (this.OpenConnection())
+            {
+                _command.CommandText = "SELECT * FROM " + tableName + " WHERE ";
+                _command.Connection = connection;
+
+                for (int i = 0;i < columnNames.Length;i++)
+                {
+                    _command.CommandText += columnNames[i] + " = @ColumnExpectedValue" + i.ToString();
+                    _command.Parameters.AddWithValue("@ColumnExpectedValue" + i.ToString(), ColumnExpectedValue[i]);
+
+                    if (i < columnNames.Length - 1)
+                    {
+                        _command.CommandText += " AND ";
+                    }
+                    else
+                    {
+                        _command.CommandText += ";";
+                    }
+                }
+                // For logging purposes
+                string query = _command.CommandText;
+                foreach (MySqlParameter p in _command.Parameters)
+                {
+                    query = query.Replace(p.ParameterName, p.Value.ToString());
+                }
+                Console.WriteLine(query);
+
+                _command.ExecuteNonQuery(); // Execute the command
+
+                MySqlDataReader mysql_Reader = _command.ExecuteReader();
+
+                if (mysql_Reader.HasRows)
+                {
+                    dataExists = true;
+                }
+            }
+            this.CloseConnection(); // Must close connection after mysql_Reader returns the result
+
+            return dataExists; // Return whether theres data or not.
+        }
+
 
 
         // <summary>
@@ -370,19 +596,15 @@ namespace MedicTalk
         /// <summary>
         /// Used to change the CURTIME() for mysq
         /// </summary>
-        public void Change_Timezone()
+        public void Change_Timezone(MySqlCommand _command)
         {
-            MySqlCommand _command = new MySqlCommand();
             string query = "SET time_zone = 'Australia/Melbourne';";
 
-            if (this.OpenConnection())
-            {
                 _command.CommandText = query;
                 _command.Connection = connection;
 
                 _command.ExecuteNonQuery();
-            }
-            this.CloseConnection();
+
         }
     }
 }

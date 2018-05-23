@@ -18,6 +18,31 @@ namespace MediTalk
 		public Mysql_Connect _mysql;
 		public Shower _shower;
 
+        [SetUp]
+        public void init()
+        {
+            Console.WriteLine("Testing for mysql connection");
+            if (_mysql != null)
+            {
+
+                if (_mysql.OpenConnection())
+                {
+                    _mysql.CloseConnection();
+                }
+            }
+        }
+
+        [TearDown]
+        public void after_testing()
+        {
+            if (_mysql != null)
+            {
+                if (_mysql.OpenConnection())
+                {
+                    _mysql.CloseConnection();
+                }
+            }
+        } 
         
 		[Test]
 		public void Test_Shower_Option_Can_Be_Chosen()

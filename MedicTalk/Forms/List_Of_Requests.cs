@@ -13,6 +13,7 @@ namespace MedicTalk
     public partial class List_Of_Requests : Form
     {
         private Form1 form1;
+        private List_Of_Incidents incidentsForm;
         public Mysql_Connect _connect;
 		public string rowToDel;
 		public string timedRowToDel;
@@ -117,5 +118,12 @@ namespace MedicTalk
 			this.Hide();
 			_visitor.Show();
 		}
-	}
+
+        private void Incidents_Button_Click(object sender, EventArgs e)
+        {
+            incidentsForm = new List_Of_Incidents(this, form1);
+            this.Hide();
+            incidentsForm.Show();
+        }
+    }
 }
