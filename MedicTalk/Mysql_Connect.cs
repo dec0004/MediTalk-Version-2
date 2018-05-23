@@ -388,13 +388,13 @@ namespace MedicTalk
             MySqlCommand _command = new MySqlCommand();
             string query = "SELECT * FROM " + tableName + " WHERE " + statementToCheck + ";";
             bool dataExists = false; // Will be returned at the end
-
-            if (this.OpenConnection())
+			Console.WriteLine("Checking");
+			if (this.OpenConnection())
             {
                 _command.CommandText = query;
                 _command.Connection = connection;
 
-                Console.WriteLine(query);
+               
 
                 MySqlDataReader mysql_Reader = _command.ExecuteReader();
                 
@@ -402,12 +402,12 @@ namespace MedicTalk
                 if (mysql_Reader.HasRows)
                 {
                     dataExists = true;
-                }
+				}
             }
 
             this.CloseConnection(); // Must close connection after mysql_Reader returns the result
-
-            return dataExists; // Return whether theres data or not.
+			Console.WriteLine(dataExists);
+			return dataExists; // Return whether theres data or not.
         }
 
 

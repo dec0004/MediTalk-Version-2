@@ -46,11 +46,9 @@ namespace MediTalk
 			foreach (DataGridViewRow row in _alarm.AlarmsList.Rows)
 			{
                 Console.WriteLine("The value is: " + row.Cells[0].Value);
-                if (row.Cells[0].Value.ToString() == "05:32:00")
-                //if (row.Cells[0] != null)
-                {
-				    isThere = true;
-				}
+              
+				    isThere =  _mysql.DataExists("NEWTimedRequests", "TimeToComplete = '02:34:00'");
+
 			}
 			Assert.AreEqual(isThere, true);
 		
@@ -64,8 +62,8 @@ namespace MediTalk
             Do_Pretesting_Login();
 			
             // Simulate user entering these values
-			_alarm.Minute_Box.Text = "32";
-			_alarm.Hour_Box.Text = "5";
+			_alarm.Minute_Box.Text = "34";
+			_alarm.Hour_Box.Text = "2";
 
 
             // Simulate the user clicking on submit to ensure that method works
