@@ -1,0 +1,36 @@
+CREATE TABLE Incidents (
+	UID int(10) NOT NULL,
+	DateOfIncident DATE NOT NULL,
+	TimeOfIncident TIME NOT NULL,
+	IncidentDescription VARCHAR(255) NOT NULL,
+	PRIMARY KEY (UID, DateOfIncident, TimeOfIncident),
+	FOREIGN KEY (UID) References NEWUsers(UID)
+) ENGINE=InnoDB;
+
+
+INSERT INTO Incidents (UID, DateOfIncident, TimeOfIncident, IncidentDescription) VALUES (5, CURDATE(), CURTIME(), 'Resident fainted at 3:00PM. They sustained a hip injury during the fall');
+INSERT INTO Incidents (UID, DateOfIncident, TimeOfIncident, IncidentDescription) VALUES (5, CURDATE(), CURTIME(), 'Resident claimed they felt light-headed. When asked how long they felt that way, they said they\'ve felt that way since 12:30PM');
+INSERT INTO Incidents (UID, DateOfIncident, TimeOfIncident, IncidentDescription) VALUES (5, CURDATE(), CURTIME(), 'Resident refused to listen or speak to staff as well as their friends');
+
+
+INSERT INTO Incidents (UID, DateOfIncident, TimeOfIncident, IncidentDescription) VALUES (6, '2018-05-19', '06:30:28', 'Resident complained of severe chest pains');
+INSERT INTO Incidents (UID, DateOfIncident, TimeOfIncident, IncidentDescription) VALUES (6, '2018-05-14', '10:20:20', 'Resident complained that they were having a sever migraine. Resident doesnt have a history of having migraines');
+INSERT INTO Incidents (UID, DateOfIncident, TimeOfIncident, IncidentDescription) VALUES (6, '2018-05-10', '14:34:55', 'Resident refused to listen to anyone, wouldnt take meds');
+INSERT INTO Incidents (UID, DateOfIncident, TimeOfIncident, IncidentDescription) VALUES (7, '2018-05-10', 12:10:03, 'Resident refused to take their medicine');
+INSERT INTO Incidents (UID, DateOfIncident, TimeOfIncident, IncidentDescription) VALUES (7, '2018-05-11', CURTIME(), 'Resident refused to take their medicine');
+
+
+
+
+
+SELECT U.UID, U.FirstName, U.LastName, I.DateOfIncident, I.TimeOfIncident, I.IncidentDescription 
+FROM NEWUsers U
+INNER JOIN Incidents I ON U.UID = I.UID
+
+
+
+SELECT U.UID, U.FirstName, U.LastName, I.DateOfIncident, I.TimeOfIncident, I.IncidentDescription
+FROM NEWUsers U
+INNER JOIN Incidents I ON U.UID = I.UID
+WHERE I.DateOfIncident = '2018-05-23';
+                
